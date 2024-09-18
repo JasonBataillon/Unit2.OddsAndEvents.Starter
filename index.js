@@ -7,24 +7,6 @@ const state = {
   Evens: [],
 };
 
-/** Moves the input number */
-
-function addToNumberBank() {
-  const form = document.querySelector('form');
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const numberInput = document.querySelector('#number');
-    const number = parseInt(numberInput.value, 10);
-
-    if (!isNaN(number) && number !== '') {
-      state.numBank.push(number);
-      numberInput.value = '';
-      render();
-    }
-  });
-}
-
 // === Render ===
 
 /** Renders numbers in the number bank */
@@ -86,6 +68,7 @@ function render() {
   renderInputNumber();
   renderOddsInput();
   renderEvensInput();
+  addToNumberBank();
 }
 
 // === Sort buttons functions ===
@@ -113,6 +96,30 @@ function sortAll() {
   render();
 }
 
+// === Script ===
+
+//Initial render
+
+render();
+
+/** Moves the input number */
+
+function addToNumberBank() {
+  const form = document.querySelector('form');
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const numberInput = document.querySelector('#number');
+    const number = parseInt(numberInput.value, 10);
+
+    if (!isNaN(number) && number !== '') {
+      state.numBank.push(number);
+      numberInput.value = '';
+      render();
+    }
+  });
+}
+
 // === Sort button event listeners
 
 document.querySelector('#sortOne').addEventListener('click', (event) => {
@@ -124,10 +131,3 @@ document.querySelector('#sortAll').addEventListener('click', (event) => {
   event.preventDefault();
   sortAll();
 });
-
-// === Script ===
-
-//Initial render
-
-render();
-addToNumberBank();
